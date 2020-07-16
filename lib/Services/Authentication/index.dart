@@ -14,9 +14,8 @@ class Authentication {
 
   // Fazer sign-up com e-mail e senha
   Future signUpWithEmailAndPassword(
-      String name, String lastName, String email, String password) async {
+      String name, String email, String password) async {
     try {
-      String fullName = name + " " + lastName;
       AuthResult result = await _auth.createUserWithEmailAndPassword(
           email: email, password: password);
 
@@ -24,7 +23,7 @@ class Authentication {
       FirebaseUser currentUser = await _auth.currentUser();
       UserUpdateInfo userUpdateInfo = new UserUpdateInfo();
 
-      userUpdateInfo.displayName = fullName;
+      userUpdateInfo.displayName = name;
       currentUser.updateProfile(userUpdateInfo);
 
       return _userFromFirebaseUser(user);

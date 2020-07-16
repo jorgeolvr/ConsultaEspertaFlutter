@@ -98,7 +98,7 @@ class _LoginState extends State<Login> {
                             ),
                           ),
                           prefixIcon: Icon(
-                            Icons.account_circle,
+                            Icons.email,
                             color: Colors.grey,
                           ),
                           filled: true,

@@ -17,7 +17,6 @@ class _RegisterState extends State<Register> {
 
   // State
   String name = '';
-  String lastName = '';
   String email = '';
   String password = '';
   String error = '';
@@ -55,62 +54,9 @@ class _RegisterState extends State<Register> {
                           setState(() => name = str);
                         },
                         validator: (value) =>
-                            value.isEmpty ? 'Insira um nome' : null,
+                            value.isEmpty ? 'Insira um nome completo' : null,
                         decoration: InputDecoration(
-                          hintText: "Digite seu nome",
-                          enabledBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(40),
-                            borderSide: BorderSide(
-                              color: Color(0xFFE0E0E0),
-                            ),
-                          ),
-                          disabledBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(40),
-                            borderSide: BorderSide(
-                              color: Color(0xFFE0E0E0),
-                            ),
-                          ),
-                          hintStyle: TextStyle(
-                            fontSize: 18,
-                            color: Color(0xFFA0A5BD),
-                          ),
-                          focusedBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(40),
-                            borderSide: BorderSide(
-                              color: Color(0xFFE0E0E0),
-                            ),
-                          ),
-                          errorBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(40),
-                            borderSide: BorderSide(
-                              color: Color(0xFFE0E0E0),
-                            ),
-                          ),
-                          focusedErrorBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(40),
-                            borderSide: BorderSide(
-                              color: Color(0xFFE0E0E0),
-                            ),
-                          ),
-                          prefixIcon: Icon(
-                            Icons.face,
-                            color: Colors.grey,
-                          ),
-                          filled: true,
-                          fillColor: Color(0xFFF7F7F7),
-                        ),
-                      ),
-                    ),
-                    Container(
-                      margin: EdgeInsets.only(top: 10),
-                      child: TextFormField(
-                        onChanged: (str) {
-                          setState(() => lastName = str);
-                        },
-                        validator: (value) =>
-                            value.isEmpty ? 'Insira um sobrenome' : null,
-                        decoration: InputDecoration(
-                          hintText: "Digite seu sobrenome",
+                          hintText: "Digite seu nome e sobrenome",
                           enabledBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(40),
                             borderSide: BorderSide(
@@ -199,7 +145,7 @@ class _RegisterState extends State<Register> {
                             ),
                           ),
                           prefixIcon: Icon(
-                            Icons.account_circle,
+                            Icons.email,
                             color: Colors.grey,
                           ),
                           filled: true,
@@ -272,7 +218,7 @@ class _RegisterState extends State<Register> {
                             setState(() => loading = true);
                             dynamic result =
                                 await _auth.signUpWithEmailAndPassword(
-                                    name, lastName, email, password);
+                                    name, email, password);
                             if (result == null) {
                               setState(() {
                                 error =
