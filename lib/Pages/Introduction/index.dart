@@ -57,7 +57,7 @@ class Introduction extends StatelessWidget {
         margin: EdgeInsets.only(left: 30, right: 30, bottom: 35),
         child: RaisedButton(
           onPressed: () {
-            Navigator.pushNamed(context, '/login');
+            Navigator.pushNamed(context, '/wrapper');
           },
           child: Text(
             "Vamos lá".toUpperCase(),

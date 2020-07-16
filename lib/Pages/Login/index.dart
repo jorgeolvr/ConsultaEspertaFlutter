@@ -182,10 +182,6 @@ class _LoginState extends State<Login> {
                         setState(() {
                           error = 'Não é possível entrar com essas credenciais';
                         });
-                      } else {
-                        setState(() {
-                          error = 'Existe conta';
-                        });
                       }
                     }
                   },

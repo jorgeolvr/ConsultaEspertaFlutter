@@ -12,13 +12,23 @@ class Authentication {
     return _auth.onAuthStateChanged.map(_userFromFirebaseUser);
   }
 
-  // Entrar com e-mail e senha
+  // Fazer sign-in com e-mail e senha
   Future signInWithEmailAndPassword(String email, String password) async {
     try {
       AuthResult result = await _auth.signInWithEmailAndPassword(
           email: email, password: password);
       FirebaseUser user = result.user;
       return user;
+    } catch (e) {
+      print(e.toString());
+      return null;
+    }
+  }
+
+  // Fazer sign-out
+  Future signOut() async {
+    try {
+      return await _auth.signOut();
     } catch (e) {
       print(e.toString());
       return null;
