@@ -56,7 +56,7 @@ class _RegisterState extends State<Register> {
                         validator: (value) =>
                             value.isEmpty ? 'Insira um nome completo' : null,
                         decoration: InputDecoration(
-                          hintText: "Digite seu nome e sobrenome",
+                          hintText: "Digite seu nome",
                           enabledBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(40),
                             borderSide: BorderSide(

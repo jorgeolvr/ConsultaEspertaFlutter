@@ -39,7 +39,7 @@ class Introduction extends StatelessWidget {
               constraints: BoxConstraints(maxWidth: 280),
               margin: EdgeInsets.only(top: 16),
               child: Text(
-                "Ajudamos pessoas a encontrar médicos por meio de recomendações.",
+                "Ajudamos as pessoas a encontrar médicos por meio de recomendações.",
                 style: GoogleFonts.roboto(
                   fontSize: 16,
                   fontWeight: FontWeight.w400,
