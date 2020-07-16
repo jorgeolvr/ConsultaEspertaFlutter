@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mobile/Pages/Register/index.dart';
 import 'package:provider/provider.dart';
 import 'Pages/Introduction/index.dart';
 import 'Pages/Wrapper/index.dart';
@@ -20,7 +21,8 @@ class MyApp extends StatelessWidget {
         //initialRoute: '/',
         routes: {
           //'/': (context) => MyHomePage(),
-          '/wrapper': (context) => Wrapper()
+          '/wrapper': (context) => Wrapper(),
+          '/register': (context) => Register()
         },
         home: Introduction(),
       ),

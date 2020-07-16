@@ -1,21 +1,23 @@
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:mobile/Services/Authentication/index.dart';
 import 'package:mobile/Components/Loading/index.dart';
 
-class Login extends StatefulWidget {
+class Register extends StatefulWidget {
   final Function toggleView;
-  Login({this.toggleView});
+  Register({this.toggleView});
+
   @override
-  _LoginState createState() => _LoginState();
+  _RegisterState createState() => _RegisterState();
 }
 
-class _LoginState extends State<Login> {
+class _RegisterState extends State<Register> {
   final Authentication _auth = Authentication();
   final _formKey = GlobalKey<FormState>();
   bool loading = false;
 
   // State
+  String name = '';
+  String lastName = '';
   String email = '';
   String password = '';
   String error = '';
@@ -29,13 +31,6 @@ class _LoginState extends State<Login> {
               brightness: Brightness.light,
               backgroundColor: Color(0xFFF5FFFA),
               elevation: 0,
-              leading: IconButton(
-                icon: Icon(
-                  Icons.arrow_back,
-                  color: Color(0xFF3F51B5),
-                ),
-                onPressed: () => Navigator.of(context).pop(),
-              ),
             ),
             backgroundColor: Color(0xFFF5FFFA),
             body: Padding(
@@ -55,6 +50,112 @@ class _LoginState extends State<Login> {
                       ),
                     ),
                     Container(
+                      child: TextFormField(
+                        onChanged: (str) {
+                          setState(() => name = str);
+                        },
+                        validator: (value) =>
+                            value.isEmpty ? 'Insira um nome' : null,
+                        decoration: InputDecoration(
+                          hintText: "Digite seu nome",
+                          enabledBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(40),
+                            borderSide: BorderSide(
+                              color: Color(0xFFE0E0E0),
+                            ),
+                          ),
+                          disabledBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(40),
+                            borderSide: BorderSide(
+                              color: Color(0xFFE0E0E0),
+                            ),
+                          ),
+                          hintStyle: TextStyle(
+                            fontSize: 18,
+                            color: Color(0xFFA0A5BD),
+                          ),
+                          focusedBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(40),
+                            borderSide: BorderSide(
+                              color: Color(0xFFE0E0E0),
+                            ),
+                          ),
+                          errorBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(40),
+                            borderSide: BorderSide(
+                              color: Color(0xFFE0E0E0),
+                            ),
+                          ),
+                          focusedErrorBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(40),
+                            borderSide: BorderSide(
+                              color: Color(0xFFE0E0E0),
+                            ),
+                          ),
+                          prefixIcon: Icon(
+                            Icons.face,
+                            color: Colors.grey,
+                          ),
+                          filled: true,
+                          fillColor: Color(0xFFF7F7F7),
+                        ),
+                      ),
+                    ),
+                    Container(
+                      margin: EdgeInsets.only(top: 10),
+                      child: TextFormField(
+                        onChanged: (str) {
+                          setState(() => lastName = str);
+                        },
+                        validator: (value) =>
+                            value.isEmpty ? 'Insira um sobrenome' : null,
+                        decoration: InputDecoration(
+                          hintText: "Digite seu sobrenome",
+                          enabledBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(40),
+                            borderSide: BorderSide(
+                              color: Color(0xFFE0E0E0),
+                            ),
+                          ),
+                          disabledBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(40),
+                            borderSide: BorderSide(
+                              color: Color(0xFFE0E0E0),
+                            ),
+                          ),
+                          hintStyle: TextStyle(
+                            fontSize: 18,
+                            color: Color(0xFFA0A5BD),
+                          ),
+                          focusedBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(40),
+                            borderSide: BorderSide(
+                              color: Color(0xFFE0E0E0),
+                            ),
+                          ),
+                          errorBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(40),
+                            borderSide: BorderSide(
+                              color: Color(0xFFE0E0E0),
+                            ),
+                          ),
+                          focusedErrorBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(40),
+                            borderSide: BorderSide(
+                              color: Color(0xFFE0E0E0),
+                            ),
+                          ),
+                          prefixIcon: Icon(
+                            Icons.face,
+                            color: Colors.grey,
+                          ),
+                          filled: true,
+                          fillColor: Color(0xFFF7F7F7),
+                        ),
+                      ),
+                    ),
+                    Container(
+                      margin: EdgeInsets.only(top: 10),
                       child: TextFormField(
                         onChanged: (str) {
                           setState(() => email = str);
@@ -162,21 +263,6 @@ class _LoginState extends State<Login> {
                       ),
                     ),
                     Container(
-                      margin: EdgeInsets.only(top: 15),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        children: <Widget>[
-                          InkWell(
-                            onTap: () {},
-                            child: Text(
-                              "Esqueceu a senha?",
-                              style: TextStyle(color: Color(0xFF757575)),
-                            ),
-                          )
-                        ],
-                      ),
-                    ),
-                    Container(
                       width: double.infinity,
                       height: 50,
                       margin: EdgeInsets.only(top: 15),
@@ -184,19 +270,20 @@ class _LoginState extends State<Login> {
                         onPressed: () async {
                           if (_formKey.currentState.validate()) {
                             setState(() => loading = true);
-                            dynamic result = await _auth
-                                .signInWithEmailAndPassword(email, password);
+                            dynamic result =
+                                await _auth.signUpWithEmailAndPassword(
+                                    name, lastName, email, password);
                             if (result == null) {
                               setState(() {
                                 error =
-                                    'Não é possível entrar com essas credenciais';
+                                    'Não é possível cadastrar essas credenciais';
                                 loading = false;
                               });
                             }
                           }
                         },
                         child: Text(
-                          "Entrar".toUpperCase(),
+                          "Cadastrar".toUpperCase(),
                           style: TextStyle(color: Colors.black),
                         ),
                         color: Color(0xFFE0E0E0),
@@ -215,64 +302,6 @@ class _LoginState extends State<Login> {
                       ),
                     ),
                     Container(
-                      margin: EdgeInsets.only(top: 20),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: <Widget>[
-                          Text(
-                            "• ou •".toUpperCase(),
-                            style: TextStyle(
-                              color: Color(0xFF757575),
-                            ),
-                          )
-                        ],
-                      ),
-                    ),
-                    Container(
-                      width: double.infinity,
-                      height: 50,
-                      margin: EdgeInsets.only(top: 20),
-                      child: RaisedButton.icon(
-                        onPressed: () {
-                          Navigator.pushNamed(context, '/login');
-                        },
-                        label: Text(
-                          "Entrar com o google".toUpperCase(),
-                          style: TextStyle(color: Colors.white),
-                        ),
-                        icon: FaIcon(
-                          FontAwesomeIcons.google,
-                          color: Colors.white,
-                        ),
-                        color: Color(0xFFE2325A),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                      ),
-                    ),
-                    Container(
-                      width: double.infinity,
-                      height: 50,
-                      margin: EdgeInsets.only(top: 10),
-                      child: RaisedButton.icon(
-                        onPressed: () {
-                          Navigator.pushNamed(context, '/register');
-                        },
-                        label: Text(
-                          "Entrar com o facebook".toUpperCase(),
-                          style: TextStyle(color: Colors.white),
-                        ),
-                        icon: FaIcon(
-                          FontAwesomeIcons.facebook,
-                          color: Colors.white,
-                        ),
-                        color: Color(0xFF3F51B5),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                      ),
-                    ),
-                    Container(
                       margin: EdgeInsets.only(top: 15),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
@@ -283,7 +312,7 @@ class _LoginState extends State<Login> {
                               widget.toggleView();
                             },
                             child: Text(
-                              "Novo por aqui? Cadastre-se",
+                              "Já possui uma conta? Entre aqui",
                               style: TextStyle(
                                 color: Color(0xFF757575),
                               ),

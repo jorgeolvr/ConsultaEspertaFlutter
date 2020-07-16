@@ -12,6 +12,28 @@ class Authentication {
     return _auth.onAuthStateChanged.map(_userFromFirebaseUser);
   }
 
+  // Fazer sign-up com e-mail e senha
+  Future signUpWithEmailAndPassword(
+      String name, String lastName, String email, String password) async {
+    try {
+      String fullName = name + " " + lastName;
+      AuthResult result = await _auth.createUserWithEmailAndPassword(
+          email: email, password: password);
+
+      FirebaseUser user = result.user;
+      FirebaseUser currentUser = await _auth.currentUser();
+      UserUpdateInfo userUpdateInfo = new UserUpdateInfo();
+
+      userUpdateInfo.displayName = fullName;
+      currentUser.updateProfile(userUpdateInfo);
+
+      return _userFromFirebaseUser(user);
+    } catch (e) {
+      print(e.toString());
+      return null;
+    }
+  }
+
   // Fazer sign-in com e-mail e senha
   Future signInWithEmailAndPassword(String email, String password) async {
     try {
