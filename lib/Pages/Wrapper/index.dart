@@ -7,8 +7,8 @@ import 'package:provider/provider.dart';
 class Wrapper extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    // State global para acessar dados do usuário
     final user = Provider.of<User>(context);
-    print(user);
 
     if (user == null) {
       return Authenticate();

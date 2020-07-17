@@ -4,22 +4,15 @@ import '../../Models/User/index.dart';
 class Authentication {
   final FirebaseAuth _auth = FirebaseAuth.instance;
 
+  // Retorna o id e nome do usuário logado no sistema
   User _userFromFirebaseUser(FirebaseUser user) {
-    return user != null ? User(uid: user.uid) : null;
+    return user != null
+        ? User(uid: user.uid, displayName: user.displayName)
+        : null;
   }
 
   Stream<User> get user {
     return _auth.onAuthStateChanged.map(_userFromFirebaseUser);
-  }
-
-  // Retorna o nome do usuário logado no sistema
-  Future<String> getUsername() async {
-    FirebaseUser currentUser = await _auth.currentUser();
-    if (currentUser != null) {
-      return currentUser.displayName;
-    } else {
-      return '';
-    }
   }
 
   // Fazer sign-up com e-mail e senha

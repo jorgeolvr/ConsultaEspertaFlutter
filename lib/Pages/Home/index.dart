@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mobile/Services/Authentication/index.dart';
 import 'package:google_fonts/google_fonts.dart';
+import '../../Components/AppBar/index.dart';
 
 class Home extends StatefulWidget {
   @override
@@ -9,72 +10,17 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   final Authentication _auth = Authentication();
-  String uf = '';
 
-  void _showSettingsPanel() {
-    showModalBottomSheet(
-        context: context,
-        builder: (context) {
-          return Container(
-            padding: EdgeInsets.symmetric(vertical: 50, horizontal: 50),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: <Widget>[
-                FutureBuilder(
-                  future: _auth.getUsername(),
-                  builder: (context, snapshot) {
-                    if (snapshot.hasData) {
-                      return Text(
-                        snapshot.data,
-                        style: TextStyle(fontSize: 16),
-                      );
-                    }
-                    return Container();
-                  },
-                ),
-                InkWell(
-                  onTap: () async {
-                    await _auth.signOut();
-                    Navigator.pop(context);
-                  },
-                  child: Text(
-                    "Sair",
-                    style: TextStyle(
-                      fontSize: 16,
-                      color: Color(0xFF322153),
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          );
-        });
-  }
+  // State
+  String uf = '';
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: new AppBar(
-        brightness: Brightness.light,
-        backgroundColor: Color(0xFFF5FFFA),
-        elevation: 0,
-        /*title: Container(
-          width: 40,
-          child: Image.asset("assets/images/simbolo-consulta.png"),
-        ), */
-        leading: IconButton(
-          icon: Icon(
-            Icons.account_circle,
-            color: Color(0xFF322153),
-          ),
-          onPressed: () {
-            _showSettingsPanel();
-          },
-        ),
-      ),
+      appBar: CustomAppBar(),
       backgroundColor: Color(0xFFF5FFFA),
       body: Padding(
-        padding: EdgeInsets.only(left: 30, top: 50, right: 30, bottom: 60),
+        padding: EdgeInsets.only(left: 30, right: 30),
         child: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -106,9 +52,11 @@ class _HomeState extends State<Home> {
               ),
               Container(
                 width: double.infinity,
-                margin: EdgeInsets.only(top: 40),
+                margin: EdgeInsets.only(top: 30),
                 child: DropdownButtonFormField(
                   decoration: InputDecoration(
+                    contentPadding:
+                        EdgeInsets.symmetric(vertical: 6, horizontal: 6),
                     hintText: "Estado",
                     enabledBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(40),
@@ -145,11 +93,11 @@ class _HomeState extends State<Home> {
                       ),
                     ),
                     prefixIcon: Icon(
-                      Icons.language,
+                      Icons.terrain,
                       color: Colors.grey,
                     ),
                     filled: true,
-                    fillColor: Color(0xFFF7F7F7),
+                    fillColor: Color(0xFFFAFAFA),
                   ),
                   items: ['MG', 'RJ', 'SP'].map((value) {
                     return DropdownMenuItem(child: Text(value), value: value);
@@ -166,6 +114,8 @@ class _HomeState extends State<Home> {
                 margin: EdgeInsets.only(top: 10),
                 child: DropdownButtonFormField(
                   decoration: InputDecoration(
+                    contentPadding:
+                        EdgeInsets.symmetric(vertical: 6, horizontal: 6),
                     hintText: "Cidade",
                     enabledBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(40),
@@ -206,7 +156,7 @@ class _HomeState extends State<Home> {
                       color: Colors.grey,
                     ),
                     filled: true,
-                    fillColor: Color(0xFFF7F7F7),
+                    fillColor: Color(0xFFFAFAFA),
                   ),
                   items: ['MG', 'RJ', 'SP'].map((value) {
                     return DropdownMenuItem(child: Text(value), value: value);
@@ -223,6 +173,8 @@ class _HomeState extends State<Home> {
                 margin: EdgeInsets.only(top: 10),
                 child: DropdownButtonFormField(
                   decoration: InputDecoration(
+                    contentPadding:
+                        EdgeInsets.symmetric(vertical: 6, horizontal: 6),
                     hintText: "Especialidade",
                     enabledBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(40),
@@ -259,13 +211,19 @@ class _HomeState extends State<Home> {
                       ),
                     ),
                     prefixIcon: Icon(
-                      Icons.person_pin,
+                      Icons.work,
                       color: Colors.grey,
                     ),
                     filled: true,
-                    fillColor: Color(0xFFF7F7F7),
+                    fillColor: Color(0xFFFAFAFA),
                   ),
-                  items: ['MG', 'RJ', 'SP'].map((value) {
+                  items: [
+                    'Clínico Geral',
+                    'Cardiologista',
+                    'Oncologista',
+                    'Pediatria',
+                    'Nutricionista'
+                  ].map((value) {
                     return DropdownMenuItem(child: Text(value), value: value);
                   }).toList(),
                   onChanged: (String value) {
@@ -274,11 +232,41 @@ class _HomeState extends State<Home> {
                     });
                   },
                 ),
-              )
+              ),
+              Container(
+                width: double.infinity,
+                height: 40,
+                margin: EdgeInsets.only(top: 15),
+                child: RaisedButton(
+                  onPressed: () {},
+                  child: Text(
+                    "Buscar".toUpperCase(),
+                    style: TextStyle(color: Colors.black),
+                  ),
+                  color: Color(0xFFE0E0E0),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                ),
+              ),
             ],
           ),
         ),
       ),
+      bottomNavigationBar: BottomNavigationBar(items: [
+        BottomNavigationBarItem(
+          icon: Icon(Icons.home),
+          title: Text("Início"),
+        ),
+        BottomNavigationBarItem(
+          icon: Icon(Icons.person),
+          title: Text("Perfil"),
+        ),
+        BottomNavigationBarItem(
+          icon: Icon(Icons.schedule),
+          title: Text("Agenda"),
+        ),
+      ]),
     );
   }
 }

@@ -45,7 +45,7 @@ class _RegisterState extends State<Register> {
                       margin: EdgeInsets.only(bottom: 50),
                       width: 80,
                       child: Image.asset(
-                        "assets/images/simbolo-consulta.png",
+                        "assets/images/simbolo.png",
                       ),
                     ),
                     Container(

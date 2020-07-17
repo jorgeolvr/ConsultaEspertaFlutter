@@ -12,7 +12,7 @@ class Introduction extends StatelessWidget {
       ),
       backgroundColor: Color(0xFFF5FFFA),
       body: Padding(
-        padding: EdgeInsets.only(left: 30, top: 50, right: 30, bottom: 60),
+        padding: EdgeInsets.only(left: 30, right: 30),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: MainAxisAlignment.center,
@@ -21,7 +21,7 @@ class Introduction extends StatelessWidget {
               margin: EdgeInsets.only(bottom: 50),
               width: 200,
               child: Image.asset(
-                "assets/images/logo-cropped.png",
+                "assets/images/logo.png",
               ),
             ),
             Container(
@@ -53,7 +53,7 @@ class Introduction extends StatelessWidget {
       ),
       bottomNavigationBar: Container(
         width: double.infinity,
-        height: 50,
+        height: 40,
         margin: EdgeInsets.only(left: 30, right: 30, bottom: 35),
         child: RaisedButton(
           onPressed: () {
