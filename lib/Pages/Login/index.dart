@@ -32,7 +32,7 @@ class _LoginState extends State<Login> {
               leading: IconButton(
                 icon: Icon(
                   Icons.arrow_back,
-                  color: Color(0xFF3F51B5),
+                  color: Color(0xFF322153),
                 ),
                 onPressed: () => Navigator.of(context).pop(),
               ),

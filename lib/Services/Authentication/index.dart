@@ -12,6 +12,16 @@ class Authentication {
     return _auth.onAuthStateChanged.map(_userFromFirebaseUser);
   }
 
+  // Retorna o nome do usuário logado no sistema
+  Future<String> getUsername() async {
+    FirebaseUser currentUser = await _auth.currentUser();
+    if (currentUser != null) {
+      return currentUser.displayName;
+    } else {
+      return '';
+    }
+  }
+
   // Fazer sign-up com e-mail e senha
   Future signUpWithEmailAndPassword(
       String name, String email, String password) async {
