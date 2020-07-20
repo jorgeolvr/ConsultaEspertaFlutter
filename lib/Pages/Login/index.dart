@@ -30,6 +30,8 @@ class _LoginState extends State<Login> {
               backgroundColor: Color(0xFFF5FFFA),
               elevation: 0,
               leading: IconButton(
+                splashColor: Colors.transparent,
+                highlightColor: Colors.transparent,
                 icon: Icon(
                   Icons.arrow_back,
                   color: Color(0xFF322153),
@@ -103,7 +105,7 @@ class _LoginState extends State<Login> {
                             color: Colors.grey,
                           ),
                           filled: true,
-                          fillColor: Color(0xFFFAFAFA),
+                          fillColor: Color(0xFFFFFFFF),
                         ),
                       ),
                     ),
@@ -151,7 +153,7 @@ class _LoginState extends State<Login> {
                           focusedErrorBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(40),
                             borderSide: BorderSide(
-                              color: Color(0xFFE0E0E0),
+                              color: Color(0xFFFFF),
                             ),
                           ),
                           prefixIcon: Icon(
@@ -159,7 +161,7 @@ class _LoginState extends State<Login> {
                             color: Colors.grey,
                           ),
                           filled: true,
-                          fillColor: Color(0xFFFAFAFA),
+                          fillColor: Color(0xFFFFFFFF),
                         ),
                         obscureText: true,
                       ),
@@ -247,7 +249,7 @@ class _LoginState extends State<Login> {
                           FontAwesomeIcons.google,
                           color: Colors.white,
                         ),
-                        color: Color(0xFFE2325A),
+                        color: Color(0xFFF50057),
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(10),
                         ),
@@ -262,7 +264,7 @@ class _LoginState extends State<Login> {
                           Navigator.pushNamed(context, '/register');
                         },
                         label: Text(
-                          "Entrar com o facebook".toUpperCase(),
+                          "Entrar com facebook".toUpperCase(),
                           style: TextStyle(color: Colors.white),
                         ),
                         icon: FaIcon(
